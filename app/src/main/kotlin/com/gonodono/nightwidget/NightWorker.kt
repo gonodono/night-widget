@@ -23,7 +23,9 @@ class NightWorker(
         val name = ComponentName(context, NightWidget::class.java)
         val ids = manager.getAppWidgetIds(name)
         NightWidget.update(context, manager, ids)
+
         enqueue(context)
+
         return Result.success()
     }
 

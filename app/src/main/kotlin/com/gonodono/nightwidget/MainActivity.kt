@@ -12,9 +12,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -32,18 +30,19 @@ class MainActivity : ComponentActivity() {
         setContent {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.spacedBy(
+                    space = 25.dp,
+                    alignment = Alignment.CenterVertically
+                ),
                 modifier = Modifier
                     .fillMaxSize()
                     .background(MaterialTheme.colorScheme.background)
             ) {
-                Text(stringResource(R.string.app_name), fontSize = 36.sp)
-                Spacer(Modifier.size(20.dp))
+                Text(stringResource(R.string.app_name), fontSize = 40.sp)
                 when {
                     canPin() -> Button(::tryPin) { Text("Pin an App Widget") }
                     else -> Text("Can't pin. Place the App Widget manually.")
                 }
-                Spacer(Modifier.size(20.dp))
                 Button(::finish) { Text("Close") }
             }
         }

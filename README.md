@@ -4,11 +4,12 @@ A brief example of using a `Worker` with a content URI trigger to try to get
 notified of night mode changes in an App Widget.
 
 <p align="center">
-<img src="images/demo.gif" alt="Demonstration video." width="15%" />
+<img src="images/demo.gif" alt="Demonstration video." width="20%" />
 </p>
 
-The content trigger functionality wasn't introduced until API level 24, so
-that's the `minSdk` for this approach.
+**NB**: If you're loading these images from resources, you don't need this.
+Simply put the night mode images in the relevant `res/drawable*/` directories
+with the `-night` suffix, and it will be handled automagically.
 
 The specific `Settings` value that's monitored – `ui_night_mode` – is
 undocumented and excluded from the SDK, so it probably won't work everywhere,
@@ -41,7 +42,7 @@ uninstall/reinstall quite often. Just a heads up.
 
 MIT License
 
-Copyright (c) 2024 Mike M.
+Copyright (c) 2025 Mike M.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
