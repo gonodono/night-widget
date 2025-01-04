@@ -7,9 +7,9 @@ notified of night mode changes in an App Widget.
 <img src="images/demo.gif" alt="Demonstration video." width="20%" />
 </p>
 
-**NB**: If you're loading these images from resources, you don't need this.
-Simply put the night mode images in the relevant `res/drawable*/` directories
-with the `-night` suffix, and it will be handled automagically.
+**NB**: If you're planning to use this to swap out resources during a night mode
+switch, you don't need it. Simply put the night resources in the relevant `res/`
+directories with the `-night` suffix, and it will be handle automagically.
 
 The specific `Settings` value that's monitored – `ui_night_mode` – is
 undocumented and excluded from the SDK, so it probably won't work everywhere,
