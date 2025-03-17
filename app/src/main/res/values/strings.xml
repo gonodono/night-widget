@@ -1,4 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Night Widget</string>
-    <string name="night_day">Night/Day</string>
+    <string name="widget_preview">URI/Options</string>
+    <string name="uri_widget">Content URI trigger</string>
+    <string name="options_widget">Options change</string>
 </resources>

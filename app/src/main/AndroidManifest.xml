@@ -3,9 +3,7 @@
 
     <application
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true">
+        android:label="@string/app_name">
 
         <activity
             android:name=".MainActivity"
@@ -18,8 +16,21 @@
         </activity>
 
         <receiver
-            android:name=".NightWidget"
-            android:exported="true">
+            android:name=".ContentUriTriggerWidget"
+            android:exported="true"
+            android:label="@string/uri_widget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+        </receiver>
+
+        <receiver
+            android:name=".OptionsChangeWidget"
+            android:exported="true"
+            android:label="@string/options_widget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

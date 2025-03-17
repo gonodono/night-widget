@@ -12,7 +12,7 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import java.util.concurrent.TimeUnit
 
-class NightWorker(
+class ContentUriTriggerWorker(
     context: Context,
     params: WorkerParameters
 ) : CoroutineWorker(context.applicationContext, params) {
@@ -20,9 +20,9 @@ class NightWorker(
     override suspend fun doWork(): Result {
         val context = applicationContext
         val manager = AppWidgetManager.getInstance(context)
-        val name = ComponentName(context, NightWidget::class.java)
+        val name = ComponentName(context, ContentUriTriggerWidget::class.java)
         val ids = manager.getAppWidgetIds(name)
-        NightWidget.update(context, manager, ids)
+        updateNightWidget(context, manager, ids, "URI")
 
         enqueue(context)
 
@@ -31,7 +31,7 @@ class NightWorker(
 
     companion object {
 
-        private const val TAG = "NightWorker"
+        private const val WORK_NAME = "nightWidgetUpdate"
 
         private val UI_NIGHT_MODE_URI = Settings.Secure.CONTENT_URI
             .buildUpon().appendPath("ui_night_mode").build()
@@ -41,17 +41,16 @@ class NightWorker(
                 .addContentUriTrigger(UI_NIGHT_MODE_URI, false)
                 .setTriggerContentMaxDelay(0L, TimeUnit.SECONDS)
                 .build()
-            val request = OneTimeWorkRequestBuilder<NightWorker>()
+            val request = OneTimeWorkRequestBuilder<ContentUriTriggerWorker>()
                 .setConstraints(constraints)
-                .addTag(TAG)
                 .build()
             WorkManager.getInstance(context)
-                .beginUniqueWork("Update", ExistingWorkPolicy.APPEND, request)
+                .beginUniqueWork(WORK_NAME, ExistingWorkPolicy.APPEND, request)
                 .enqueue()
         }
 
         fun cancel(context: Context) {
-            WorkManager.getInstance(context).cancelAllWorkByTag(TAG)
+            WorkManager.getInstance(context).cancelUniqueWork(WORK_NAME)
         }
     }
 }
